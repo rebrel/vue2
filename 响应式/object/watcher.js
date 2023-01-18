@@ -14,7 +14,12 @@ export default class Watcher {
   update () {
     console.log('update')
     const oldValue = this.value
+    try {
     this.value = this.get()
+
+    } catch (e) {
+      console.log(e)
+    }
     this.cb.call(this.vm, this.value, oldValue)
   }
 }
@@ -24,6 +29,9 @@ function parseExpOrFn (expOrFn) {
     let segment = expOrFn.split('.')
     return function (obj) {
       for(let i = 0; i < segment.length; i++) {
+        if (!obj) {
+          return
+        }
         obj = obj[segment[i]]
       }
       return obj

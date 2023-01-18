@@ -12,6 +12,7 @@ export class Dep {
     }
   }
   depend () {
+    console.log('depend')
     if (global.target) {
       this.addSub(global.target)
     }

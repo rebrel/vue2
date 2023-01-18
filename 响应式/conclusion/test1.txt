@@ -1,0 +1,8 @@
+ watch('data.form.other.sex', function () {console.log('update')})
+ vue会在get的时候收集依赖，所以父类元素也会收集到依赖，会多次触发事件吗？
+
+ 不会多次触发事件，因为触发cb回调的时机是在set的时候，哪个属性改变就会触发对应的watcher
+ 如果data.form = '123'
+ data.form.other = '123'
+ data.form.other.sex = '123'
+ 都会触发回调事件，且是相同的，但是仅有一次
